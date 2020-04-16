@@ -18,28 +18,28 @@ const actWait = async (amount = 0) => {
 }
 
 describe('App Component', () => {
-  it('should be able to add new repository', async() => {
-    const { getByTestId, getByText } = render(<App />);
+  it("should be able to add new repository", async () => {
+    const { getByText, getByTestId } = render(<App />);
 
-    apiMock.onGet('repositories').reply(200, []);
+    apiMock.onGet("repositories").reply(200, []);
 
-    apiMock.onPost('repositories').reply(200, {
-      id: 123,
-      url: 'https://github.com/brunodmsi/melembraai',
-      title: 'Me Lembra Ai',
-      techs: ['Node.js', 'React']
+    apiMock.onPost("repositories").reply(200, {
+      id: "123",
+      url: "https://github.com/josepholiveira",
+      title: "Desafio ReactJS",
+      techs: ["React", "Node.js"],
     });
 
     await actWait();
-    
+
     fireEvent.click(getByText("Adicionar"));
 
     await actWait();
-    
-    expect(getByTestId("repository-list")).toContainElement(      
-      getByText('Titulo: Me Lembra Ai Tecnologias: Node.js, React, Link do Github: https://github.com/brunodmsi/melembraai')
-    )
-  })
+
+    expect(getByTestId("repository-list")).toContainElement(
+      getByText("Desafio ReactJS")
+    );
+  });
 
   it('should be able to remove repository', async () => {
     const { getByTestId, getByText } = render(<App />);
